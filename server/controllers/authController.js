@@ -24,7 +24,7 @@ async function login(req, res) {
   const user = foundUser[0]
   const isAuthenticated = await bcrypt.compare(password, user.hash);
   if (isAuthenticated === true) {
-    req.session.user = { isAdmin: user.is_Admin, username: user.username, id: user.id }
+    req.session.user = { isAdmin: user.is_admin, username: user.username, id: user.id }
     return res.status(200).send(req.session.user);
   }
   return res.status(403).json('Incorrect password');
