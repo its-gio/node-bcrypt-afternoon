@@ -5,7 +5,7 @@ const massive = require("massive");
 require("dotenv").config();
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
-const { register } = require("../controllers/authController")
+const { register, login  } = require("./controllers/authController")
 
 massive(CONNECTION_STRING)
   .then(db => app.set("db", db))
@@ -21,5 +21,6 @@ app
     })
   )
   .post('/auth/register', register)
+  .post('/auth/login', login)
 
 app.listen(SERVER_PORT, () => console.log(`Rodger Rodger on port ${SERVER_PORT}`))
