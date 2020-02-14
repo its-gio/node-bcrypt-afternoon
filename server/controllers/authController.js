@@ -30,7 +30,13 @@ async function login(req, res) {
   return res.status(403).json('Incorrect password');
 }
 
+function logout(req, res) {
+  req.session.destroy();
+  res.sendStatus(200);
+}
+
 module.exports = {
   register,
-  login
+  login,
+  logout
 }
