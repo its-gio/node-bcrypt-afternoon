@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 const { register, login, logout } = require("./controllers/authController");
-const { dragonTreasure, getUserTreasure } = require("./controllers/treasureController");
+const { dragonTreasure, getUserTreasure, addUserTreasure } = require("./controllers/treasureController");
 const { usersOnly } = require("./middleware/authMiddleware");
 
 massive(CONNECTION_STRING)
@@ -27,5 +27,6 @@ app
   .get('/auth/logout', logout)
   .get('/api/treasure/dragon', dragonTreasure)
   .get('/api/treasure/user', usersOnly, getUserTreasure)
+  .post('/api/treasure/user', usersOnly, addUserTreasure)
 
 app.listen(SERVER_PORT, () => console.log(`Rodger Rodger on port ${SERVER_PORT}`))
